@@ -7,7 +7,7 @@ public int id;
 public String nome, email, password;
 public Date dataReg;
 
-public Utente(int id, String nome, String email, String password, Date dataReg) {
+public Utente( String nome, String email, String password) {
 	this.id= GestoreLogin.generaIdUtente();
     this.nome = nome;
 	this.email=email;
@@ -21,7 +21,10 @@ public String toString(){
 public void Segnala( String message){
 	Segnalazione segnalazione = new Segnalazione(message, id);
 }
+
 public String getEmail(){
 	return email;
 }
+public String getNome(){return nome;}
+public String getPassword(){return password;}
 }
