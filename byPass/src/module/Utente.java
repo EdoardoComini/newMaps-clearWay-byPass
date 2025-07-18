@@ -27,4 +27,9 @@ public class Utente {
     }
     public String getNome(){return nome;}
     public String getPassword(){return password;}
+
+    public Segnalazione createSegnalazione(String text){
+        Segnalazione segn1=new Segnalazione(text, id);
+        return segn1;
+    }
 }
