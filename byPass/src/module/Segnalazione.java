@@ -1,5 +1,4 @@
-package model;
-
+package module;
 import java.util.Date;
 
 public class Segnalazione {
@@ -16,3 +15,4 @@ public class Segnalazione {
 
     }
 }
+
