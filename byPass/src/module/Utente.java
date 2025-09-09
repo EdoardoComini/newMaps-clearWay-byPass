@@ -2,16 +2,17 @@ package module;
 
 import java.util.Date;
 
+
 public class Utente {
     public int id;
-    public String nome, email, password;
+    public String nome, email, passwordHash;
     public Date dataReg;
 
     public Utente( String nome, String email, String password) {
         this.id= GestoreLogin.generaIdUtente();
         this.nome = nome;
         this.email=email;
-        this.password=password;
+        this.passwordHash= PasswordUtils.hashPassword(password);
         this.dataReg=new Date(System.currentTimeMillis());
     }
     @Override
@@ -26,10 +27,25 @@ public class Utente {
         return email;
     }
     public String getNome(){return nome;}
-    public String getPassword(){return password;}
 
-    public Segnalazione createSegnalazione(String text){
-        Segnalazione segn1=new Segnalazione(text, id);
-        return segn1;
+    public boolean verificaPassword(String passwordInserita){
+        boolean verifica=false;
+        int tentativi=0;
+        String hashpassword=PasswordUtils.hashPassword(passwordInserita);
+        while(verifica != true&&tentativi<=3){
+            if(passwordInserita==null&& passwordInserita.isBlank()){
+                tentativi++;
+                System.out.println("hai ancora "+tentativi+" tentativi");
+                return false;
+            }
+            if(hashpassword.equals(this.passwordHash)){
+                verifica=true;
+                return true;
+            }else{
+                tentativi++;
+                System.out.println("hai ancora "+tentativi+" tentativi");
+                break;
+            }
+        }return false;
     }
 }
